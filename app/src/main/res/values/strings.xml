@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TaskList</string>
+    <string name="Welcome_Text">Registrate o inicia sesión</string>
+    <string name="User_Text">Usuario</string>
+    <string name="Email_hint">Escribe tu Email</string>
+    <string name="Password_Text">Contraseña</string>
+    <string name="Password_hint">Escribe tu contraseña</string>
+    <string name="SingUp_Text">Registrarse</string>
+    <string name="LogIn_Text">Acceder</string>
+
 </resources>
