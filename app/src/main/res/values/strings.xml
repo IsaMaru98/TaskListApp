@@ -7,5 +7,6 @@
     <string name="Password_hint">Escribe tu contraseña</string>
     <string name="SingUp_Text">Registrarse</string>
     <string name="LogIn_Text">Acceder</string>
+    <string name="enterTask_hint">Escribe la descripción de la tarea</string>
 
 </resources>

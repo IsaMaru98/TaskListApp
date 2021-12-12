@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "652364705131",
+    "project_id": "taskslist-7dd55",
+    "storage_bucket": "taskslist-7dd55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652364705131:android:fc9d50c5e3bd774f10b02e",
+        "android_client_info": {
+          "package_name": "com.isamaru.tasklist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "652364705131-fo2dft6fq28h22ed1jvmsn4p8s7rdtbu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi8T_fgQltsoCD9Q1vUckgI10irjvrEbA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "652364705131-fo2dft6fq28h22ed1jvmsn4p8s7rdtbu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
