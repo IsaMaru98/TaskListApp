@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -21,6 +22,9 @@ public class TasksActivity extends AppCompatActivity {
     private RecyclerView rvTasks;
 
     private TaskAdapter taskAdapter;
+
+    private EditText description;
+
 
     Button btnCerrar;
 
@@ -36,6 +40,8 @@ public class TasksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
+
+
                 Toast.makeText(TasksActivity.this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
                 goToLogin();
 
@@ -46,7 +52,10 @@ public class TasksActivity extends AppCompatActivity {
     private void initUI() {
         tilNewTask = findViewById(R.id.til_new_task);
         tilNewTask.setEndIconOnClickListener(v -> {
-            Toast.makeText(TasksActivity.this, "Add new task to list", Toast.LENGTH_SHORT)
+
+            String description =  etNewTask.getText().toString();
+
+            Toast.makeText(TasksActivity.this, "Task " + description+" Added", Toast.LENGTH_SHORT)
                     .show();
         });
 
@@ -63,4 +72,5 @@ public class TasksActivity extends AppCompatActivity {
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
+
 }
