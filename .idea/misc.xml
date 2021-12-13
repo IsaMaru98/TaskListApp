@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/maris/MisionTIC/Ciclo4/TaskListApp/app/src/main/res/drawable/ic_album.xml" value="0.240625" />
         <entry key="..\:/Users/maris/MisionTIC/Ciclo4/TaskListApp/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/maris/MisionTIC/Ciclo4/TaskListApp/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
         <entry key="..\:/Users/maris/MisionTIC/Ciclo4/TaskListApp/app/src/main/res/layout/activity_register.xml" value="0.21105072463768115" />
-        <entry key="..\:/Users/maris/MisionTIC/Ciclo4/TaskListApp/app/src/main/res/layout/activity_tasks.xml" value="0.12771739130434784" />
+        <entry key="..\:/Users/maris/MisionTIC/Ciclo4/TaskListApp/app/src/main/res/layout/activity_tasks.xml" value="0.2" />
+        <entry key="..\:/Users/maris/MisionTIC/Ciclo4/TaskListApp/app/src/main/res/layout/item_task.xml" value="0.20742753623188406" />
       </map>
     </option>
   </component>
