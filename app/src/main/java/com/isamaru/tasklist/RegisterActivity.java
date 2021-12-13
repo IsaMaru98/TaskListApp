@@ -24,6 +24,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     AwesomeValidation awesomeValidation;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

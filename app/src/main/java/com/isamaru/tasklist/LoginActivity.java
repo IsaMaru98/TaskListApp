@@ -1,18 +1,34 @@
 package com.isamaru.tasklist;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseUser;
+
 public class LoginActivity extends AppCompatActivity {
     Button btn_login,btn_registrar;
     EditText et_mail,et_pass;
+
+    AwesomeValidation awesomeValidation;
+    FirebaseAuth firebaseAuth;
+
+
 
 
 
@@ -27,6 +43,18 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btnLogIn);
         btn_registrar = findViewById(R.id.btnSingUp);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if(user != null){
+            goToTask();
+        }
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+        awesomeValidation.addValidation(this,R.id.etEmail_singUp, Patterns.EMAIL_ADDRESS,R.string.invalid_mail);
+        awesomeValidation.addValidation(this,R.id.etPass_singUp,".{6,}",R.string.invalid_password);
+
         btn_registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,12 +66,39 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (awesomeValidation.validate()) {
+                    String mail = et_mail.getText().toString();
+                    String pass = et_pass.getText().toString();
+
+                    firebaseAuth.signInWithEmailAndPassword(mail,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            if (task.isSuccessful()) {
+                                goToTask();
+
+                            }else{
+                                String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
+                                dameToastdeerror(errorCode);
+                            }
+
+                        }
+                    });
+                }
 
             }
         });
 
 
     }//fin del oncreate!
+
+    private void goToTask() {
+        Intent i = new Intent(this, TasksActivity.class);
+        i.putExtra("mail",et_mail.getText().toString());
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+
+    }
 
     private void dameToastdeerror(String error) {
 
