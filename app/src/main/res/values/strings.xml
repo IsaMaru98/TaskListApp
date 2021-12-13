@@ -8,5 +8,12 @@
     <string name="SingUp_Text">Registrarse</string>
     <string name="LogIn_Text">Acceder</string>
     <string name="enterTask_hint">Escribe la descripción de la tarea</string>
+    <string name="RegisterAcc_text">Registrar cuenta</string>
+
+
+    <string name="invalid_mail">Ingrese mail válido</string>
+    <string name="invalid_password">6 caracteres o más requeridos</string>
+
+
 
 </resources>
