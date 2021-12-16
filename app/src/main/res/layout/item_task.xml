@@ -15,8 +15,7 @@
         android:layout_height="56dp"
         android:contentDescription="TODO"
         android:src="@drawable/ic_album"
-        app:tint="@color/material_on_background_disabled"
-        tools:ignore="ImageContrastCheck" />
+        app:tint="@color/material_on_background_disabled" />
 
     <TextView
         android:id="@+id/tv_description"

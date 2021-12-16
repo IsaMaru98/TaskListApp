@@ -1,4 +1,6 @@
-package com.isamaru.tasklist;
+package com.isamaru.tasklist.view.dto;
+
+import com.isamaru.tasklist.view.dto.TaskState;
 
 public class TaskItem {
     private String description;

@@ -1,4 +1,4 @@
-package com.isamaru.tasklist;
+package com.isamaru.tasklist.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,8 +14,16 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.isamaru.tasklist.LoginActivity;
+import com.isamaru.tasklist.R;
+import com.isamaru.tasklist.mvp.TaskMVP;
+import com.isamaru.tasklist.presenter.TaskPresenter;
+import com.isamaru.tasklist.view.adapter.TaskAdapter;
+import com.isamaru.tasklist.view.dto.TaskItem;
 
-public class TasksActivity extends AppCompatActivity {
+import java.util.List;
+
+public class TasksActivity extends AppCompatActivity implements TaskMVP.ViewTask {
 
     private TextInputLayout tilNewTask;
     private TextInputEditText etNewTask;
@@ -25,6 +33,9 @@ public class TasksActivity extends AppCompatActivity {
 
     private EditText description;
 
+    //variable para llamar el metodo del presenter
+    private TaskMVP.PresenterTask presenter;
+
 
     Button btnCerrar;
 
@@ -33,7 +44,10 @@ public class TasksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks);
 
+        presenter = new TaskPresenter(TasksActivity.this);
+
         initUI();
+        presenter.loadTasks();
 
         btnCerrar = (Button) findViewById(R.id.btnLogOut);
         btnCerrar.setOnClickListener(new View.OnClickListener() {
@@ -46,8 +60,8 @@ public class TasksActivity extends AppCompatActivity {
                 goToLogin();
 
             }
-        });
-    }
+        });//Fin boton cerrar sesión
+    }//Fin onCreate
 
     private void initUI() {
         tilNewTask = findViewById(R.id.til_new_task);
@@ -73,4 +87,8 @@ public class TasksActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    @Override
+    public void showTaskList(List<TaskItem> items) {
+        taskAdapter.setData(items);
+    }
 }

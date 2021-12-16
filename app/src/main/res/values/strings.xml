@@ -14,6 +14,7 @@
     <string name="invalid_mail">Ingrese mail válido</string>
     <string name="invalid_password">6 caracteres o más requeridos</string>
     <string name="LogOut_text">Cerrar sesión</string>
+    <string name="EnterTask_hint">Enter task description</string>
 
 
 </resources>

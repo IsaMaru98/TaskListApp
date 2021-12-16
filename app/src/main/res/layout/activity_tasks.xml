@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".view.TasksActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_new_task"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-        android:hint="@string/enterTask_hint"
+        android:hint="@string/EnterTask_hint"
         app:endIconDrawable="@android:drawable/ic_input_add"
         app:endIconMode="custom"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,16 +31,17 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tasks"
-        android:layout_width="324dp"
-        android:layout_height="520dp"
+        android:layout_width="327dp"
+        android:layout_height="558dp"
         android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_new_task"
-        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintVertical_bias="0.069"
         tools:listitem="@layout/item_task" />
 
     <Button
@@ -50,8 +51,8 @@
         android:text="@string/LogOut_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.98"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.97" />
+        app:layout_constraintVertical_bias="0.98" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.isamaru.tasklist;
+package com.isamaru.tasklist.view.dto;
 
 public enum TaskState {
     PENDING,

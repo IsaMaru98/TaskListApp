@@ -1,4 +1,4 @@
-package com.isamaru.tasklist;
+package com.isamaru.tasklist.view.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.isamaru.tasklist.R;
+import com.isamaru.tasklist.view.dto.TaskItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +36,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_task, parent);
+                .inflate(R.layout.item_task, parent,false);
 
         return new ViewHolder(view);
     }
