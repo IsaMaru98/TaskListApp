@@ -4,6 +4,8 @@ import com.isamaru.tasklist.model.TaskInteractor;
 import com.isamaru.tasklist.mvp.TaskMVP;
 import com.isamaru.tasklist.view.dto.TaskItem;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class TaskPresenter implements TaskMVP.PresenterTask {
@@ -29,6 +31,19 @@ public class TaskPresenter implements TaskMVP.PresenterTask {
 
     @Override
     public void addNewTask() {
+        //Le pido a la vista que me dé la descripción de la tarea
+        String description =  viewTask.getTaskDescription();
+        String date = SimpleDateFormat.getDateTimeInstance().format(new Date());
+
+        // Creo el contenido del item que quiero mostrar
+        TaskItem task = new TaskItem(description, date);
+
+        // Le digo al modelo que guarde esa tarea
+
+        modelTask.saveTask(task);
+        // Ledigo a la vista que muestre la tarea
+        viewTask.addTaskToList(task);
+
 
     }
 }

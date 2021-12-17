@@ -65,13 +65,18 @@ public class TasksActivity extends AppCompatActivity implements TaskMVP.ViewTask
 
     private void initUI() {
         tilNewTask = findViewById(R.id.til_new_task);
+        tilNewTask.setEndIconOnClickListener(v -> presenter.addNewTask());
+
+         /* Para que aparezca un Toast diciendo que se agragó tal tarea
         tilNewTask.setEndIconOnClickListener(v -> {
+
+
 
             String description =  etNewTask.getText().toString();
 
             Toast.makeText(TasksActivity.this, "Task " + description+" Added", Toast.LENGTH_SHORT)
                     .show();
-        });
+        });*/
 
         etNewTask = findViewById(R.id.et_new_task);
 
@@ -91,4 +96,16 @@ public class TasksActivity extends AppCompatActivity implements TaskMVP.ViewTask
     public void showTaskList(List<TaskItem> items) {
         taskAdapter.setData(items);
     }
+
+    @Override
+    public String getTaskDescription() {
+        return etNewTask.getText().toString();
+    }
+
+    @Override
+    public void addTaskToList(TaskItem task) {
+        taskAdapter.addItem(task);
+    }
+
+
 }

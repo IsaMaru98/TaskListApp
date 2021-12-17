@@ -16,6 +16,14 @@ public class TaskInteractor implements TaskMVP.ModelTask {
     }
     @Override
     public List<TaskItem> getTasks() { //Aquí se haría la conxión a la BD para obtener la lista, pero lo vamos a hacer hardcoded
-        return tempItems;
+
+        return new ArrayList<>(tempItems);
+    }
+
+    @Override
+    public void saveTask(TaskItem task) {
+        tempItems.add(task);
+
+
     }
 }

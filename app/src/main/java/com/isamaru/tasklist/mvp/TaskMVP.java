@@ -9,6 +9,8 @@ public interface TaskMVP {
     interface ModelTask {
 
         List<TaskItem> getTasks();
+
+        void saveTask(TaskItem task);
     }
     interface PresenterTask{
         void loadTasks();
@@ -19,5 +21,8 @@ public interface TaskMVP {
     interface  ViewTask{
 
         void showTaskList(List<TaskItem> items);
+        String getTaskDescription();
+
+        void addTaskToList(TaskItem task);
     }
 }
