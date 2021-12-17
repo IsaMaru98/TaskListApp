@@ -12,8 +12,8 @@ import java.util.List;
 public class TaskPresenter implements TaskMVP.PresenterTask {
 
     //Inicializo el modelo y la vista, pues necesito comunicarme con ellos para mostrar las tareas
-    private TaskMVP.ModelTask modelTask;
-    private TaskMVP.ViewTask viewTask;
+    private final  TaskMVP.ModelTask modelTask;
+    private final TaskMVP.ViewTask viewTask;
 
     public TaskPresenter(TaskMVP.ViewTask viewTask){ //constructor de la clase TaskPresenter
         this.modelTask = new TaskInteractor(); // inicializo  objeto tipo Model (Interactor)
@@ -49,11 +49,38 @@ public class TaskPresenter implements TaskMVP.PresenterTask {
     }
 
     @Override
-    public void taskItemClicked(TaskItem item) {
-        item.setState(TaskState.DONE);
+    public void taskItemClicked(TaskItem task) {
+        String message = task.getState() == TaskState.PENDING
+                ? "¿Desea marcar como terminado?"
+                : "¿Desea marcar como pendiente?";
 
-        modelTask.updateTask(item);
-        viewTask.updateTask(item);
+        viewTask.showConfirmDialog(message, task);
 
+    }
+
+    @Override
+    public void updateTask(TaskItem task) {
+        task.setState(task.getState() == TaskState.PENDING ? TaskState.DONE : TaskState.PENDING);
+
+        modelTask.updateTask(task);
+        viewTask.updateTask(task);
+
+    }
+
+    @Override
+    public void taskItemLongClicked(TaskItem task) {
+
+        if(task.getState() == TaskState.DONE) {
+
+            viewTask.showDeleteDialog("¿Desea eliminar esta tarea?", task);
+        }
+
+
+    }
+
+    @Override
+    public void deleteTask(TaskItem task) {
+        modelTask.deleteTask(task);
+        viewTask.deleteTask(task);
     }
 }

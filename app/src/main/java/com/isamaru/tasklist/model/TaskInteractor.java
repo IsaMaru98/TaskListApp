@@ -31,4 +31,9 @@ public class TaskInteractor implements TaskMVP.ModelTask {
     public void updateTask(TaskItem item) {
 
     }
+
+    @Override
+    public void deleteTask(TaskItem task) {
+
+    }
 }

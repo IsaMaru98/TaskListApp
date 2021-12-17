@@ -1,5 +1,6 @@
 package com.isamaru.tasklist.view;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,7 +35,7 @@ public class TasksActivity extends AppCompatActivity implements TaskMVP.ViewTask
     private EditText description;
 
     //variable para llamar el metodo del presenter
-    private TaskMVP.PresenterTask presenter;
+    private TaskMVP.PresenterTask presenterTask;
 
 
     Button btnCerrar;
@@ -44,10 +45,10 @@ public class TasksActivity extends AppCompatActivity implements TaskMVP.ViewTask
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks);
 
-        presenter = new TaskPresenter(TasksActivity.this);
+        presenterTask = new TaskPresenter(TasksActivity.this);
 
         initUI();
-        presenter.loadTasks();
+        presenterTask.loadTasks();
 
         btnCerrar = (Button) findViewById(R.id.btnLogOut);
         btnCerrar.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +66,7 @@ public class TasksActivity extends AppCompatActivity implements TaskMVP.ViewTask
 
     private void initUI() {
         tilNewTask = findViewById(R.id.til_new_task);
-        tilNewTask.setEndIconOnClickListener(v -> presenter.addNewTask());
+        tilNewTask.setEndIconOnClickListener(v -> presenterTask.addNewTask());
 
          /* Para que aparezca un Toast diciendo que se agragó tal tarea
         tilNewTask.setEndIconOnClickListener(v -> {
@@ -81,7 +82,8 @@ public class TasksActivity extends AppCompatActivity implements TaskMVP.ViewTask
         etNewTask = findViewById(R.id.et_new_task);
 
         taskAdapter = new TaskAdapter();
-        taskAdapter.setlistener(item -> presenter.taskItemClicked(item));
+        taskAdapter.setClicklistener(item -> presenterTask.taskItemClicked(item));
+        taskAdapter.setLongClickListener(item -> presenterTask.taskItemLongClicked(item));
         rvTasks = findViewById(R.id.rv_tasks);
         rvTasks.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
         rvTasks.setAdapter(taskAdapter);
@@ -111,6 +113,35 @@ public class TasksActivity extends AppCompatActivity implements TaskMVP.ViewTask
     @Override
     public void updateTask(TaskItem task) {
         taskAdapter.updateTask(task);
+    }
+
+    @Override
+    public void showConfirmDialog(String message, TaskItem task) {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Tarea seleccionada")
+                .setMessage(message)
+                .setPositiveButton("Sí", (dialog, which) -> presenterTask.updateTask(task))
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    @Override
+    public void showDeleteDialog(String message, TaskItem task) {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Tarea seleccionada")
+                .setMessage(message)
+                .setPositiveButton("Sí", (dialog, which) -> presenterTask.deleteTask(task))
+                .setNegativeButton("No", null)
+                .show();
+
+    }
+
+    @Override
+    public void deleteTask(TaskItem task) {
+        taskAdapter.removeTask(task);
+
     }
 
 

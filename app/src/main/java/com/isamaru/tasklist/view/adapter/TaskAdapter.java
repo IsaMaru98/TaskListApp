@@ -22,6 +22,7 @@ import java.util.List;
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     private List<TaskItem> data;
     private OnItemClickListener listener;
+    private OnItemClickListener longListener;
 
     public TaskAdapter() {
         data = new ArrayList<>();
@@ -37,8 +38,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         notifyItemInserted(data.size() - 1);
     }
 
-    public void setlistener(OnItemClickListener listener) {
+    public void setClicklistener(OnItemClickListener listener) {
         this.listener = listener;
+    }
+
+    public void setLongClickListener(OnItemClickListener longListener) {
+        this.longListener = longListener;
     }
 
     @NonNull
@@ -54,7 +59,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TaskItem item = data.get(position);
 
-        holder.itemView.setOnClickListener(v -> listener.onCLick(item));
+        if (listener != null) {
+
+        holder.itemView.setOnClickListener(v -> listener.onClick(item));}
+
+        if (longListener != null) {
+            holder.itemView.setOnLongClickListener(v -> {
+                longListener.onClick(item);
+                return false;
+            });
+        }
 
         holder.tvDescription.setText(item.getDescription());
         holder.tvDate.setText(item.getDate());
@@ -79,6 +93,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
     }
 
+    public void removeTask(TaskItem task) {
+
+        int i = data.indexOf(task);
+        data.remove(i);
+        notifyItemRemoved(i);
+
+    }
+
     protected class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView ivIcon;
         private final TextView tvDescription;
@@ -94,6 +116,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     }
 
     public interface OnItemClickListener {
-        void onCLick(TaskItem item);
+        void onClick(TaskItem item);
     }
 }
