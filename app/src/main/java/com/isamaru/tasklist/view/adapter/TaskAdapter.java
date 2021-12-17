@@ -1,5 +1,7 @@
 package com.isamaru.tasklist.view.adapter;
 
+import android.content.Context;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,10 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.isamaru.tasklist.R;
 import com.isamaru.tasklist.view.dto.TaskItem;
+import com.isamaru.tasklist.view.dto.TaskState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +50,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         TaskItem item = data.get(position);
         holder.tvDescription.setText(item.getDescription());
         holder.tvDate.setText(item.getDate());
+
+        int color = item.getState() == TaskState.PENDING ? R.color.task_pending : R.color.task_done;
+        holder.ivIcon.setColorFilter(
+                ContextCompat.getColor(holder.itemView.getContext(), color),
+                android.graphics.PorterDuff.Mode.MULTIPLY);
     }
 
     @Override
