@@ -81,6 +81,7 @@ public class TasksActivity extends AppCompatActivity implements TaskMVP.ViewTask
         etNewTask = findViewById(R.id.et_new_task);
 
         taskAdapter = new TaskAdapter();
+        taskAdapter.setlistener(item -> presenter.taskItemClicked(item));
         rvTasks = findViewById(R.id.rv_tasks);
         rvTasks.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
         rvTasks.setAdapter(taskAdapter);
@@ -105,6 +106,11 @@ public class TasksActivity extends AppCompatActivity implements TaskMVP.ViewTask
     @Override
     public void addTaskToList(TaskItem task) {
         taskAdapter.addItem(task);
+    }
+
+    @Override
+    public void updateTask(TaskItem task) {
+        taskAdapter.updateTask(task);
     }
 
 

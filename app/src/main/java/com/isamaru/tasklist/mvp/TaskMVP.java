@@ -11,12 +11,15 @@ public interface TaskMVP {
         List<TaskItem> getTasks();
 
         void saveTask(TaskItem task);
+
+        void updateTask(TaskItem item);
     }
     interface PresenterTask{
         void loadTasks();
         void addNewTask();
 
 
+        void taskItemClicked(TaskItem item);
     }
     interface  ViewTask{
 
@@ -24,5 +27,7 @@ public interface TaskMVP {
         String getTaskDescription();
 
         void addTaskToList(TaskItem task);
+
+        void updateTask(TaskItem task);
     }
 }

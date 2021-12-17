@@ -3,6 +3,7 @@ package com.isamaru.tasklist.presenter;
 import com.isamaru.tasklist.model.TaskInteractor;
 import com.isamaru.tasklist.mvp.TaskMVP;
 import com.isamaru.tasklist.view.dto.TaskItem;
+import com.isamaru.tasklist.view.dto.TaskState;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,6 +45,15 @@ public class TaskPresenter implements TaskMVP.PresenterTask {
         // Ledigo a la vista que muestre la tarea
         viewTask.addTaskToList(task);
 
+
+    }
+
+    @Override
+    public void taskItemClicked(TaskItem item) {
+        item.setState(TaskState.DONE);
+
+        modelTask.updateTask(item);
+        viewTask.updateTask(item);
 
     }
 }
