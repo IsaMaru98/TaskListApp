@@ -34,7 +34,7 @@ public class TasksActivity extends AppCompatActivity implements TaskMVP.ViewTask
 
     private EditText description;
 
-    //variable para llamar el metodo del presenter
+    //variable para crear objeto presenter y utilizar los metodos
     private TaskMVP.PresenterTask presenterTask;
 
 
@@ -51,17 +51,8 @@ public class TasksActivity extends AppCompatActivity implements TaskMVP.ViewTask
         presenterTask.loadTasks();
 
         btnCerrar = (Button) findViewById(R.id.btnLogOut);
-        btnCerrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-
-
-                Toast.makeText(TasksActivity.this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
-                goToLogin();
-
-            }
-        });//Fin boton cerrar sesión
+        btnCerrar.setOnClickListener(v ->
+                presenterTask.logOut());//Fin boton cerrar sesión
     }//Fin onCreate
 
     private void initUI() {
@@ -89,11 +80,7 @@ public class TasksActivity extends AppCompatActivity implements TaskMVP.ViewTask
         rvTasks.setAdapter(taskAdapter);
     }
 
-    private void goToLogin() {
-        Intent i = new Intent(this, LoginActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(i);
-    }
+
 
     @Override
     public void showTaskList(List<TaskItem> items) {
@@ -142,6 +129,19 @@ public class TasksActivity extends AppCompatActivity implements TaskMVP.ViewTask
     public void deleteTask(TaskItem task) {
         taskAdapter.removeTask(task);
 
+    }
+
+    @Override
+    public void goToLogin() {
+        Intent i = new Intent(this, LoginActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+    }
+
+    @Override
+    public void showLogoutMessage() {
+        Toast.makeText(TasksActivity.this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
+        goToLogin();
     }
 
 

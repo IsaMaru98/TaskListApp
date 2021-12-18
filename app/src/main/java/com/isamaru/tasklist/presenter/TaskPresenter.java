@@ -83,4 +83,15 @@ public class TaskPresenter implements TaskMVP.PresenterTask {
         modelTask.deleteTask(task);
         viewTask.deleteTask(task);
     }
+
+    @Override
+    public void logOut() {
+        // le digo al modelo que cierre sesión en Firebase
+        modelTask.logOut();
+
+        //le digo a la vista que vuelva a la activiy de login
+        viewTask.goToLogin();
+        //le digo a la vista que muestre un toast
+        viewTask.showLogoutMessage();
+    }
 }

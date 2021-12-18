@@ -1,6 +1,10 @@
 package com.isamaru.tasklist.model;
 
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.isamaru.tasklist.mvp.TaskMVP;
+import com.isamaru.tasklist.view.TasksActivity;
 import com.isamaru.tasklist.view.dto.TaskItem;
 
 import java.util.ArrayList;
@@ -8,7 +12,7 @@ import java.util.List;
 
 public class TaskInteractor implements TaskMVP.ModelTask {
 
-    private List<TaskItem> tempItems;
+    private final List<TaskItem> tempItems;
 
     public TaskInteractor() {
         tempItems = new ArrayList<>();
@@ -35,5 +39,10 @@ public class TaskInteractor implements TaskMVP.ModelTask {
     @Override
     public void deleteTask(TaskItem task) {
 
+    }
+
+    @Override
+    public void logOut() {
+        FirebaseAuth.getInstance().signOut();
     }
 }

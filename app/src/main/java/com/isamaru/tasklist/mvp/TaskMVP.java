@@ -15,6 +15,8 @@ public interface TaskMVP {
         void updateTask(TaskItem item);
 
         void deleteTask(TaskItem task);
+
+        void logOut();
     }
     interface PresenterTask{
         void loadTasks();
@@ -28,6 +30,8 @@ public interface TaskMVP {
         void taskItemLongClicked(TaskItem task);
 
         void deleteTask(TaskItem task);
+
+        void logOut();
     }
     interface  ViewTask{
 
@@ -43,5 +47,9 @@ public interface TaskMVP {
         void showDeleteDialog(String message, TaskItem task);
 
         void deleteTask(TaskItem task);
+
+        void goToLogin();
+
+        void showLogoutMessage();
     }
 }
